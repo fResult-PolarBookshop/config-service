@@ -65,7 +65,7 @@ dependencyManagement {
 tasks.withType<BootBuildImage> {
     buildpacks =
         listOf(
-            "docker://docker.io/paketobuildpacks/apt:latest",
+            "docker://docker.io/paketobuildpacks/apt:0.3.0",
             "urn:cnb:builder:paketo-buildpacks/java",
         )
 
@@ -73,7 +73,7 @@ tasks.withType<BootBuildImage> {
     environment =
         mapOf(
             "BP_JVM_VERSION" to "${java.toolchain.languageVersion.get()}",
-            "BP_APT_PACKAGES" to "curl",
+            "BP_APT_PACKAGES" to "busybox-static",
         )
 
     docker {
