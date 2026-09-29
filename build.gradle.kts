@@ -63,8 +63,18 @@ dependencyManagement {
 }
 
 tasks.withType<BootBuildImage> {
+    buildpacks =
+        listOf(
+            "docker://docker.io/paketobuildpacks/apt:latest",
+            "urn:cnb:builder:paketo-buildpacks/java",
+        )
+
     imageName = "${projectDir.name}:${project.version}"
-    environment = mapOf("BP_JVM_VERSION" to "${java.toolchain.languageVersion.get()}")
+    environment =
+        mapOf(
+            "BP_JVM_VERSION" to "${java.toolchain.languageVersion.get()}",
+            "BP_APT_PACKAGES" to "curl",
+        )
 
     docker {
         publishRegistry {
